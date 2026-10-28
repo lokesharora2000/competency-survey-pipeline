@@ -1,0 +1,11 @@
+domain,wave,n_items,alpha,missing_pct
+Data management,pre,3,0.705,2.2
+Data management,post,3,0.819,2.2
+Data analysis,pre,3,0.744,2.2
+Data analysis,post,3,0.838,2.2
+Visualization,pre,3,0.811,1.9
+Visualization,post,3,0.797,0.8
+Research lifecycle,pre,3,0.765,2.5
+Research lifecycle,post,3,0.786,1.7
+Teaching & consulting,pre,3,0.778,1.4
+Teaching & consulting,post,3,0.822,2.5

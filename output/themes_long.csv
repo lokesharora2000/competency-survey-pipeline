@@ -1,0 +1,19 @@
+institution_type,theme,share
+R1 university,confidence_stats,0.15
+Regional college,confidence_stats,0.22
+Small college / under-resourced,confidence_stats,0.26
+R1 university,institutional_support,0.15
+Regional college,institutional_support,0.19
+Small college / under-resourced,institutional_support,0.05
+R1 university,need_hands_on,0.17
+Regional college,need_hands_on,0.16
+Small college / under-resourced,need_hands_on,0.19
+R1 university,peer_community,0.14
+Regional college,peer_community,0.14
+Small college / under-resourced,peer_community,0.13
+R1 university,time_workload,0.18
+Regional college,time_workload,0.09
+Small college / under-resourced,time_workload,0.15
+R1 university,tools_access,0.21
+Regional college,tools_access,0.2
+Small college / under-resourced,tools_access,0.23

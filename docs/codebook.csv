@@ -1,0 +1,7 @@
+code,rule_regex
+time_workload,\b(time|workload|duties)\b
+need_hands_on,\b(hands-on|worked examples?|practice)\b
+confidence_stats,\b(statistic\w*|which test|intimidat\w*|method questions)\b
+institutional_support,\b(institution|budget|role)\b
+peer_community,\b(colleagues|community|peers?)\b
+tools_access,\b(licen[cs]es?|nvivo|install\w*|software)\b
