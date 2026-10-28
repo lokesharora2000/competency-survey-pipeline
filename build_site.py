@@ -52,6 +52,6 @@ tpl = Path("site_src/template.html").read_text(encoding="utf-8")
 for f in ("style.css", "app.js", "stats.js"):
     shutil.copy(Path("site_src") / f, SITE / f)
 (SITE / "data").mkdir(exist_ok=True)
-for f in ("synthetic_survey.csv", "instrument_items.csv", "pilot_survey.csv", "pilot_items.csv"):
+for f in ("synthetic_survey.csv", "instrument_items.csv", "pilot_survey.csv", "pilot_items.csv", "qualtrics_style_sample.csv"):
     shutil.copy(Path("data") / f, SITE / "data" / (f.replace("synthetic_survey", "sample_survey")))
 print("built docs/")
