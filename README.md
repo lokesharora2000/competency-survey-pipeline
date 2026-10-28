@@ -7,6 +7,15 @@ refine/QA a survey instrument, analyze pre/post data, code open-ended responses,
 IMLS project "Data and Research Competency: Capacity Building for Academic Librarians" (competency framework,
 training, evaluation of training impact). It is not real UF data, and results here say nothing about real librarians.
 
+## Live tools (run in the browser, no data leaves it)
+Site: https://lokesharora2000.github.io/competency-survey-pipeline/
+- **Instrument review**: item-rest correlation, alpha-if-deleted, floor/ceiling, skipped items, redundant pairs, with a plain-language fix list. Handles Qualtrics exports (the two header rows under the column names are detected and dropped) and reverse-coded items.
+- **Coding workbench**: editable codebook, live coding, kappa against a human coder's labels, disagreement list, and words recurring in uncoded comments.
+- **Gap explorer**: group by any column; pre/post change view when `pre_`/`post_` columns exist.
+- A pilot sample with four deliberately flawed draft items shows what the review catches.
+
+Source for the site is in `site_src/`; `python build_site.py` writes `docs/`.
+
 ## Run
 ```
 python generate_synthetic_data.py   # writes data/
@@ -28,4 +37,4 @@ Needs pandas, numpy, scipy, scikit-learn, matplotlib.
 - Kappa is high because the synthetic text was generated from the same themes; on real data the rules need
   iterative refinement. The point is the workflow: codebook -> auto first pass -> human validation -> agreement stats.
 - Self-rated confidence is not measured skill; a real design should pair it with performance tasks.
-- Mappable to the team's tools: codes and cases export as CSV for NVivo; the analysis could be ported to R.
+- Coded comments export as CSV (one 0/1 column per code). The analysis could be ported to R.

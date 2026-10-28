@@ -64,3 +64,27 @@ df.to_csv("data/synthetic_survey.csv", index=False)
 pd.DataFrame([{"item_id": f"q{k+1:02d}", "domain": d, "text": i} for k, (d, i) in enumerate(ITEMS)]
              ).to_csv("data/instrument_items.csv", index=False)
 print(f"wrote {len(df)} synthetic respondents, {len(ITEMS)} items")
+
+# --- Pilot version of the instrument with deliberately flawed draft items -----------------------
+# Used by the web tools to show what the instrument review catches. Separate RNG, so the main data is unchanged.
+prng = np.random.default_rng(99)
+pilot = df[["participant_id", "role", "institution_type"]].copy()
+for k in range(1, 16):
+    pilot[f"p{k:02d}"] = df[f"pre_q{k:02d}"]
+base_item = df["pre_q01"]
+pilot["p16"] = (6 - base_item + prng.integers(-1, 2, n)).clip(1, 5)          # reverse-worded, not yet reverse-coded
+pilot["p17"] = np.where(prng.random(n) < .85, 5, prng.integers(3, 5, n))      # almost everyone answers 5
+pilot["p18"] = (df["pre_q02"] + (prng.random(n) < .05)).clip(1, 5)            # near-duplicate of p02
+pilot["p19"] = prng.integers(1, 6, n)                                          # unrelated to the rest
+pilot.loc[prng.random(n) < .12, "p19"] = np.nan                                # and often skipped
+pilot["open_text"] = df["open_text"]; pilot["gold_themes"] = df["gold_themes"]
+pilot.to_csv("data/pilot_survey.csv", index=False)
+pilot_items = [{"item_id": f"p{k+1:02d}", "domain": d, "text": i} for k, (d, i) in enumerate(ITEMS)]
+pilot_items += [
+    {"item_id": "p16", "domain": "Data analysis", "text": "I rarely feel confident choosing a statistical method (reverse-worded)"},
+    {"item_id": "p17", "domain": "Visualization", "text": "I know that charts should have titles"},
+    {"item_id": "p18", "domain": "Data analysis", "text": "I can pick the right statistical test for a question"},
+    {"item_id": "p19", "domain": "Research lifecycle", "text": "I enjoy attending conferences"},
+]
+pd.DataFrame(pilot_items).to_csv("data/pilot_items.csv", index=False)
+print("wrote pilot_survey.csv with 4 flawed draft items")

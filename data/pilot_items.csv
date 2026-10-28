@@ -1,0 +1,20 @@
+item_id,domain,text
+p01,Data management,Write a data management plan
+p02,Data management,Apply FAIR principles to a dataset
+p03,Data management,Advise on repository selection
+p04,Data analysis,Choose an appropriate statistical test
+p05,Data analysis,Clean and reshape a messy dataset
+p06,Data analysis,Interpret regression output
+p07,Visualization,Select an effective chart type
+p08,Visualization,Build a reproducible figure in R/Python
+p09,Visualization,Critique a misleading graphic
+p10,Research lifecycle,Map services to lifecycle stages
+p11,Research lifecycle,Explain IRB/data-sharing obligations
+p12,Research lifecycle,Support reproducible workflows
+p13,Teaching & consulting,Run a data-skills workshop
+p14,Teaching & consulting,Conduct a reference interview about data
+p15,Teaching & consulting,Assess learning outcomes of training
+p16,Data analysis,I rarely feel confident choosing a statistical method (reverse-worded)
+p17,Visualization,I know that charts should have titles
+p18,Data analysis,I can pick the right statistical test for a question
+p19,Research lifecycle,I enjoy attending conferences

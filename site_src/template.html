@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Competency Survey Pipeline</title>
+<link rel="stylesheet" href="style.css">
+</head><body><main>
+<header>
+  <p class="note">Demo for the Data and Research Competency project, UF Libraries ARCS</p>
+  <h1>Competency survey pipeline</h1>
+  <p>Tools for the survey and qualitative work in a competency assessment: review an instrument, code open-ended comments against a codebook, and find where training should go first. Load a sample or your own Qualtrics export.</p>
+</header>
+
+<div class="banner"><p><b>The samples are synthetic</b> (120 simulated respondents). Nothing comes from the IMLS project or real librarians. <b>Files you load stay in your browser</b>: nothing is uploaded anywhere.</p></div>
+
+<div class="databar" id="databar">
+  <div class="row">
+    <button class="primary" id="btn-sample">Load sample survey</button>
+    <button id="btn-pilot">Load pilot with problem items</button>
+    <label class="btn" for="file">Upload CSV</label><input type="file" id="file" accept=".csv,text/csv">
+    <span class="note" id="status">No data loaded.</span>
+  </div>
+  <details id="setup">
+    <summary>Column setup</summary>
+    <div class="row" style="margin-top:.6rem">
+      <label class="note">Group by <select id="sel-group"></select></label>
+      <label class="note">Comment text <select id="sel-text"></select></label>
+      <label class="note">Human codes (optional) <select id="sel-human"></select></label>
+      <label class="note">Scale min <input type="number" id="scale-min" style="width:4rem"></label>
+      <label class="note">max <input type="number" id="scale-max" style="width:4rem"></label>
+    </div>
+    <div class="row" style="margin-top:.6rem">
+      <span class="note">Items:</span>
+      <input type="text" id="prefix" placeholder="column prefix, e.g. pre_" style="width:11rem">
+      <button id="btn-prefix">Select by prefix</button><button id="btn-all">All</button><button id="btn-none">None</button>
+      <span class="note">Tick "rev" for reverse-worded items.</span>
+    </div>
+    <div class="items" id="items"></div>
+  </details>
+  <p class="err" id="err" hidden></p>
+</div>
+
+<nav role="tablist" id="tabs">
+  <button role="tab" data-tab="overview" aria-selected="true">Overview</button>
+  <button role="tab" data-tab="review" aria-selected="false">Instrument review</button>
+  <button role="tab" data-tab="coding" aria-selected="false">Coding workbench</button>
+  <button role="tab" data-tab="gaps" aria-selected="false">Gap explorer</button>
+</nav>
+
+<section class="tab" id="tab-overview">{{OVERVIEW}}</section>
+
+<section class="tab" id="tab-review" hidden>
+  <div class="card">
+    <h2>Instrument review</h2>
+    <p class="note">Checks every item for the problems that make a survey hard to interpret, then lists what to reword, reverse-code, merge or drop. Try <b>Load pilot with problem items</b> to see it flag four deliberately flawed draft items.</p>
+    <div class="thr">
+      <label>Floor/ceiling % <input type="number" id="t-ceil" value="25" min="1" max="100"></label>
+      <label>Min item-rest r <input type="number" id="t-rest" value="0.30" step="0.05"></label>
+      <label>Max missing % <input type="number" id="t-miss" value="10" min="0" max="100"></label>
+      <label>Redundant r above <input type="number" id="t-red" value="0.80" step="0.05"></label>
+    </div>
+  </div>
+  <div id="review-out"></div>
+</section>
+
+<section class="tab" id="tab-coding" hidden>
+  <div class="card">
+    <h2>Coding workbench</h2>
+    <p class="note">Each code is a list of comma-separated terms. A term matches the start of a word, so <code>statistic</code> finds "statistics". Edit the terms and every result updates. The tool suggests; the human coder decides.</p>
+    <div class="tbl"><table class="cb"><thead><tr><th>Code</th><th>Terms</th><th></th></tr></thead><tbody id="cb-body"></tbody></table></div>
+    <div class="row"><button id="cb-add">Add code</button><button id="cb-export-book">Export codebook CSV</button><button id="cb-export-coded">Export coded comments CSV</button></div>
+  </div>
+  <div id="coding-out"></div>
+</section>
+
+<section class="tab" id="tab-gaps" hidden>
+  <div class="card">
+    <h2>Gap explorer</h2>
+    <p class="note">Average rating for each group on each item. Shading shows distance from the overall average, so the weakest spots stand out. Groups with fewer than 5 respondents are faded.</p>
+    <div class="row">
+      <label class="note">Group by <select id="gap-group"></select></label>
+      <label class="note">Measure <select id="gap-mode"><option value="level">Average rating</option></select></label>
+    </div>
+  </div>
+  <div id="gaps-out"></div>
+</section>
+
+<p class="note">Code: <a href="https://github.com/lokesharora2000/competency-survey-pipeline">github.com/lokesharora2000/competency-survey-pipeline</a>. Self-rated confidence is not measured skill; a real design would pair it with performance tasks.</p>
+</main>
+<script src="stats.js"></script>
+<script src="app.js"></script>
+</body></html>
